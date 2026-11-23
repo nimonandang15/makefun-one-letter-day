@@ -15,5 +15,11 @@ import * as fs from "node:fs";
 // on one word behind it.
 const letter = "C";
 
+// Coordinator's second pass: fail loudly instead of submitting a text the
+// gate would refuse (gate: exactly 1 character).
+if (letter.length !== 1) {
+  throw new Error(`Entry must be exactly 1 character, got ${letter.length}`);
+}
+
 fs.mkdirSync("/output", { recursive: true });
 fs.writeFileSync("/output/entry.txt", letter, "utf8");
